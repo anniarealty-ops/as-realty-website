@@ -19,10 +19,10 @@ export default function Footer() {
             5-star, 100% satisfaction service.
           </p>
           <div className="flex gap-4 mt-6">
-            <a href="#" aria-label="Facebook" className="text-gray-400 hover:text-[#6B9E8A] text-xl transition-colors"><FiFacebook /></a>
-            <a href="#" aria-label="Instagram" className="text-gray-400 hover:text-[#6B9E8A] text-xl transition-colors"><FiInstagram /></a>
-            <a href="#" aria-label="YouTube" className="text-gray-400 hover:text-[#6B9E8A] text-xl transition-colors"><FiYoutube /></a>
-            <a href="#" aria-label="TikTok" className="text-gray-400 hover:text-[#6B9E8A] text-xl transition-colors"><FaTiktok /></a>
+            <a href="https://www.facebook.com/AnniaRealtor/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 hover:text-[#6B9E8A] text-xl transition-colors"><FiFacebook /></a>
+            <a href="https://www.instagram.com/annia.realtor/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 hover:text-[#6B9E8A] text-xl transition-colors"><FiInstagram /></a>
+            <a href="https://www.youtube.com/@anniasantana88" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-400 hover:text-[#6B9E8A] text-xl transition-colors"><FiYoutube /></a>
+            <a href="https://www.tiktok.com/@anniasantana88" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-gray-400 hover:text-[#6B9E8A] text-xl transition-colors"><FaTiktok /></a>
           </div>
         </div>
 
