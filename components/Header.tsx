@@ -10,7 +10,7 @@ const navLinks = [
   { label: 'Search Listings',  href: '/listings' },
   { label: 'Buy a Home',       href: '/buyers' },
   { label: 'Sell a Home',      href: '/sellers' },
-  { label: 'Free Guides',      href: '/sellers/free-guide', highlight: true },
+  { label: 'Free Guides',      href: '/free-guides', highlight: true },
   { label: 'About',            href: '/about' },
   { label: 'Contact',          href: '/contact' },
 ]
