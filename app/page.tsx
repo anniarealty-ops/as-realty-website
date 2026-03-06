@@ -74,10 +74,10 @@ export default function HomePage() {
         style={{
           backgroundImage: `
             linear-gradient(to bottom, rgba(26,46,34,0.10) 0%, rgba(26,46,34,0.50) 55%, rgba(26,46,34,0.90) 100%),
-            url('/hero-home.jpg')
+            url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1800&q=90')
           `,
           backgroundSize: 'cover',
-          backgroundPosition: 'center 40%',
+          backgroundPosition: 'center 50%',
         }}
       >
         <div className="container w-full pb-20 md:pb-28">
