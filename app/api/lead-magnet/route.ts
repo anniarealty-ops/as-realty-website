@@ -2,31 +2,29 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  const { name, email, phone, zip, type, guide, hutk, pageUri } = body
+  const { name, email, phone, zip, type, guide } = body
 
-  // 1. Send to HubSpot (same form as LeadForm)
+  // 1. Create/update contact directly in HubSpot CRM
+  const HUBSPOT_TOKEN = process.env.HUBSPOT_PRIVATE_APP_TOKEN
   try {
-    const [firstname, ...rest] = String(name || '').trim().split(' ')
-    await fetch(
-      'https://api.hsforms.com/submissions/v3/integration/submit/48952948/86f516d9-98ad-415e-81bf-0a5890be9410',
-      {
+    if (HUBSPOT_TOKEN) {
+      const [firstname, ...rest] = String(name || '').trim().split(' ')
+      await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Bearer ${HUBSPOT_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
-          fields: [
-            { name: 'firstname', value: firstname || name },
-            { name: 'lastname', value: rest.join(' ') },
-            { name: 'email', value: email },
-            { name: 'phone', value: phone },
-          ],
-          context: {
-            pageName: `lead-magnet:${guide}`,
-            ...(pageUri ? { pageUri } : {}),
-            ...(hutk ? { hutk } : {}),
+          properties: {
+            firstname: firstname || name,
+            lastname: rest.join(' '),
+            email,
+            phone,
           },
         }),
-      }
-    )
+      })
+    }
   } catch (err) {
     console.error('HubSpot form submit failed:', err)
   }

@@ -27,30 +27,12 @@ export default function LeadForm({
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>()
 
   const onSubmit = async (data: FormData) => {
-    const [firstname, ...rest] = data.name.trim().split(' ')
-    const lastname = rest.join(' ')
-    const hutk = document.cookie.match(/hubspotutk=([^;]+)/)?.[1]
     try {
-      await fetch(
-        'https://api.hsforms.com/submissions/v3/integration/submit/48952948/86f516d9-98ad-415e-81bf-0a5890be9410',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fields: [
-              { name: 'firstname', value: firstname || data.name },
-              { name: 'lastname', value: lastname },
-              { name: 'email', value: data.email },
-              { name: 'phone', value: data.phone },
-            ],
-            context: {
-              pageUri: window.location.href,
-              pageName: document.title,
-              ...(hutk ? { hutk } : {}),
-            },
-          }),
-        }
-      )
+      await fetch('/api/hubspot-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
     } catch (err) {
       console.error('HubSpot form submit failed:', err)
     }
