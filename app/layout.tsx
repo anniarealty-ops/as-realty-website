@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import StickyMobileCTA from '@/components/StickyMobileCTA'
 
 export const metadata: Metadata = {
   title: 'AS Realty & Investments | Annia Santana | Orlando FL',
@@ -32,8 +33,9 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         <Header />
-        <main>{children}</main>
+        <main className="pb-16 md:pb-0">{children}</main>
         <Footer />
+        <StickyMobileCTA />
       </body>
     </html>
   )
