@@ -27,20 +27,29 @@ export default function LeadForm({
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>()
 
   const onSubmit = async (data: FormData) => {
-    // Replace this URL with your GoHighLevel webhook URL
-    const GHL_WEBHOOK = process.env.NEXT_PUBLIC_GHL_WEBHOOK_URL || ''
+    const [firstname, ...rest] = data.name.trim().split(' ')
+    const lastname = rest.join(' ')
     try {
-      if (GHL_WEBHOOK) {
-        await fetch(GHL_WEBHOOK, {
+      await fetch(
+        'https://api.hsforms.com/submissions/v3/integration/submit/48952948/86f516d9-98ad-415e-81bf-0a5890be9410',
+        {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        })
-      }
-      setSubmitted(true)
-    } catch {
-      setSubmitted(true) // Still show success to user
+          body: JSON.stringify({
+            fields: [
+              { name: 'firstname', value: firstname || data.name },
+              { name: 'lastname', value: lastname },
+              { name: 'email', value: data.email },
+              { name: 'phone', value: data.phone },
+            ],
+            context: { pageUri: window.location.href, pageName: document.title },
+          }),
+        }
+      )
+    } catch (err) {
+      console.error('HubSpot form submit failed:', err)
     }
+    setSubmitted(true)
   }
 
   const inputClass = `w-full px-4 py-3 rounded-lg border ${
