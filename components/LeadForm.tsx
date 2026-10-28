@@ -68,6 +68,14 @@ export default function LeadForm({
         <p className={`mt-2 text-sm ${dark ? 'text-gray-300' : 'text-gray-500'}`}>
           Annia Santana will contact you within 24 hours at the number or email you provided.
         </p>
+        <a
+          href="https://calendly.com/annia-realty/15-min-strategy-call?utm_source=website"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-primary inline-block mt-6 px-6 py-3 font-bold"
+        >
+          Or Pick a Time Now →
+        </a>
       </div>
     )
   }
