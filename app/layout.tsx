@@ -32,10 +32,10 @@ export default function RootLayout({
           src="https://js.hs-scripts.com/48952948.js"
           strategy="afterInteractive"
         />
-        <Header />
-        <main className="pb-16 md:pb-0">{children}</main>
-        <Footer />
         <StickyMobileCTA />
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   )
