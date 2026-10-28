@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  const { name, email, phone, zip, type, guide } = body
+  const { name, email, phone, zip, type, guide, hutk, pageUri } = body
 
   // 1. Send to HubSpot (same form as LeadForm)
   try {
@@ -19,7 +19,11 @@ export async function POST(req: NextRequest) {
             { name: 'email', value: email },
             { name: 'phone', value: phone },
           ],
-          context: { pageName: `lead-magnet:${guide}` },
+          context: {
+            pageName: `lead-magnet:${guide}`,
+            ...(pageUri ? { pageUri } : {}),
+            ...(hutk ? { hutk } : {}),
+          },
         }),
       }
     )

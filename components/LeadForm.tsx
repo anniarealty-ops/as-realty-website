@@ -29,6 +29,7 @@ export default function LeadForm({
   const onSubmit = async (data: FormData) => {
     const [firstname, ...rest] = data.name.trim().split(' ')
     const lastname = rest.join(' ')
+    const hutk = document.cookie.match(/hubspotutk=([^;]+)/)?.[1]
     try {
       await fetch(
         'https://api.hsforms.com/submissions/v3/integration/submit/48952948/86f516d9-98ad-415e-81bf-0a5890be9410',
@@ -42,7 +43,11 @@ export default function LeadForm({
               { name: 'email', value: data.email },
               { name: 'phone', value: data.phone },
             ],
-            context: { pageUri: window.location.href, pageName: document.title },
+            context: {
+              pageUri: window.location.href,
+              pageName: document.title,
+              ...(hutk ? { hutk } : {}),
+            },
           }),
         }
       )
