@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import StickyMobileCTA from '@/components/StickyMobileCTA'
+import FreeGuidePopup from '@/components/FreeGuidePopup'
 
 export const metadata: Metadata = {
   title: 'AS Realty & Investments | Annia Santana | Orlando FL',
@@ -33,6 +34,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         <StickyMobileCTA />
+        <FreeGuidePopup />
         <Header />
         <main>{children}</main>
         <Footer />

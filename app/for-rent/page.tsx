@@ -1,0 +1,145 @@
+import { FiMapPin, FiHome, FiPhone, FiMessageSquare, FiCalendar } from 'react-icons/fi'
+import { MdOutlineBed, MdOutlineBathtub } from 'react-icons/md'
+import SignLeadForm from '@/components/SignLeadForm'
+import StickyLeadBar from '@/components/StickyLeadBar'
+import AnimateOnScroll from '@/components/AnimateOnScroll'
+
+// TODO: replace with Annia's real active rental listings (address, rent, beds/baths/sqft, photo, blurb, availability)
+const rentals = [
+  {
+    photo: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80',
+    status: 'Available Now',
+    address: '789 Sample Ln, Kissimmee, FL',
+    rent: '$2,150 / mo',
+    beds: 3,
+    baths: 2,
+    available: 'Available Now',
+    blurb: 'Bright 3-bedroom close to shopping and schools, washer/dryer included.',
+  },
+  {
+    photo: 'https://images.unsplash.com/photo-1598228723793-52759bba239c?w=900&q=80',
+    status: 'Available Dec 1',
+    address: '321 Example Dr, Hunters Creek, FL',
+    rent: '$1,950 / mo',
+    beds: 2,
+    baths: 2,
+    available: 'Available Dec 1',
+    blurb: 'Gated community townhome with community pool access.',
+  },
+]
+
+export default function ForRentPage({
+  searchParams,
+}: {
+  searchParams?: { src?: string }
+}) {
+  const src = searchParams?.src
+
+  return (
+    <>
+      {/* Hero */}
+      <section
+        className="bg-navy-900 py-24 relative"
+        style={{
+          backgroundImage: `linear-gradient(to right, rgba(9,22,58,0.92) 50%, rgba(9,22,58,0.55)), url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1400&q=80')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <span className="text-gold-400 text-sm font-semibold uppercase tracking-widest">You Scanned The Sign</span>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mt-3 max-w-2xl leading-tight">
+            Homes For Rent<br />
+            <span className="text-gold-400">In This Area</span>
+          </h1>
+          <p className="text-gray-300 mt-5 max-w-xl leading-relaxed">
+            Here's what's currently available, straight from Annia Santana. Get the full details below,
+            or get a text the second a new rental like this opens up.
+          </p>
+          <div className="flex flex-wrap gap-4 mt-8">
+            <a href="#rentals" className="btn-primary flex items-center gap-2">
+              <FiHome /> See Available Rentals
+            </a>
+            <a href="tel:4074921114" className="btn-outline border-white text-white hover:bg-white hover:text-navy-900 flex items-center gap-2">
+              <FiPhone /> Call (407) 492-1114
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Text shortcode banner */}
+      <section className="bg-gold-500 py-5">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-3 text-center text-white">
+          <FiMessageSquare className="text-xl" />
+          <p className="text-sm font-semibold">
+            In a hurry? Text <span className="underline">HOMES</span> to (407) 492-1114 and we'll send you the list instantly.
+          </p>
+        </div>
+      </section>
+
+      {/* Rentals */}
+      <section id="rentals" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <span className="gold-rule mx-auto" />
+            <span className="eyebrow">Currently Available</span>
+            <h2 className="h-section text-navy-900 mt-2">Available Rentals</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-10">
+            {rentals.map((home, i) => (
+              <AnimateOnScroll key={i} delay={i * 0.1}>
+                <div className="border border-gray-100 card-lift overflow-hidden h-full bg-white">
+                  <div
+                    className="h-56 bg-gray-200"
+                    style={{
+                      backgroundImage: `url('${home.photo}')`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  />
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-semibold uppercase tracking-widest text-gold-600">{home.status}</span>
+                      <span className="text-2xl font-extrabold text-navy-900">{home.rent}</span>
+                    </div>
+                    <p className="flex items-center gap-1 text-gray-500 text-sm mb-3">
+                      <FiMapPin /> {home.address}
+                    </p>
+                    <div className="flex items-center gap-5 text-sm text-gray-600 mb-4">
+                      <span className="flex items-center gap-1"><MdOutlineBed /> {home.beds} bd</span>
+                      <span className="flex items-center gap-1"><MdOutlineBathtub /> {home.baths} ba</span>
+                      <span className="flex items-center gap-1"><FiCalendar /> {home.available}</span>
+                    </div>
+                    <p className="text-gray-500 text-sm leading-relaxed">{home.blurb}</p>
+                  </div>
+                </div>
+              </AnimateOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
+      <div id="listings-end" />
+
+      {/* Lead form */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <span className="gold-rule" />
+            <span className="eyebrow">Never Miss A Rental</span>
+            <h2 className="h-section text-navy-900 mt-2">
+              Get Alerts<br />Before Anyone Else
+            </h2>
+            <p className="text-gray-500 mt-6 text-sm leading-relaxed max-w-sm">
+              Good rentals in this area go fast. Leave your name and number and Annia will
+              personally text you the moment a new one like this opens up, or help you apply
+              for one of the rentals above.
+            </p>
+          </div>
+          <SignLeadForm source="for-rent" src={src} />
+        </div>
+      </section>
+
+      <StickyLeadBar source="for-rent" src={src} />
+    </>
+  )
+}
